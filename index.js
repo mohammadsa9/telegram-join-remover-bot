@@ -9,8 +9,8 @@
  * in a private chat with the bot.
  *
  * OPTIONAL SECURITY: The bot can be configured to only allow a specific user (the owner)
- * to add it to groups. If `OWNER_ID` and `BOT_ID` are both set in the environment,
- * the bot will leave any group it's added to by another user. If they are not set,
+ * to add it to groups. If `OWNER_ID` is set in the environment, the bot will
+ * leave any group it's added to by another user. If `OWNER_ID` is not set,
  * this check is disabled, and anyone can add the bot.
  *
  * For this to work, the bot must be a member of the target Telegram group
@@ -122,13 +122,14 @@ async function handleWebhook(request, env, ctx) {
                 const isLeaveMessage = msg.left_chat_member;
 
                 // Determine if the optional security check should be performed.
-                const performOwnerCheck = env.OWNER_ID && env.BOT_ID;
+                const performOwnerCheck = env.OWNER_ID;
 
                 if (isJoinMessage) {
                     if (performOwnerCheck) {
-                        // Security check is enabled.
+                        // Security check is enabled. Extract BOT_ID from the token.
+                        const BOT_ID = env.BOT_TOKEN.split(':')[0];
                         const botWasAdded = msg.new_chat_members.some(
-                            (member) => member.id.toString() === env.BOT_ID
+                            (member) => member.id.toString() === BOT_ID
                         );
 
                         if (botWasAdded && msg.from.id.toString() !== env.OWNER_ID) {

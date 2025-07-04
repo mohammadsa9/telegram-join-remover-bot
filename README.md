@@ -22,9 +22,8 @@ Follow these steps to deploy your own instance of the bot.
 
 You will need the following information.
 
-- **Telegram Bot Token**: Get this by creating a new bot with **@BotFather** on Telegram.
-- **Your Telegram User ID** (Optional): To use the owner-only mode, get your ID from **@userinfobot**.
-- **Your Bot's ID** (Optional): To use the owner-only mode, get your bot's ID from **@BotFather** (`/mybots` -> Select Bot -> API Token). The ID is the number before the colon `:`.
+- **Telegram Bot Token**: Get this from **[@BotFather](https://t.me/BotFather)** on Telegram.
+- **Your Telegram User ID** (Optional): For owner-only mode, get your ID from **[@userinfobot](https://t.me/userinfobot)**.
 
 ### 2. Deploy to Cloudflare Workers
 
@@ -43,19 +42,18 @@ This is the most important step for making your bot work securely.
 
 #### Required Variables
 
-| Variable name    | Value                              |
-|------------------|------------------------------------|
-| `BOT_TOKEN`      | The full token from @BotFather.    |
-| `SECRET_TOKEN`   | A long, random, and secure password you create. |
+| Variable name  | Value                                           |
+| -------------- | ----------------------------------------------- |
+| `BOT_TOKEN`    | The full token from @BotFather.                 |
+| `SECRET_TOKEN` | A long, random, and secure password you create. |
 
 #### Optional Variables (for Owner-Only Mode)
 
-Add these two variables **only if you want to restrict who can add the bot to groups**. If you leave these out, anyone can add the bot.
+Add this variable **only if you want to restrict who can add the bot to groups**. If you leave this out, anyone can add the bot.
 
-| Variable name | Value                     |
-|---------------|---------------------------|
+| Variable name | Value                           |
+| ------------- | ------------------------------- |
 | `OWNER_ID`    | Your personal Telegram User ID. |
-| `BOT_ID`      | Your bot's ID (the number part of the token). |
 
 ### 4. Set the Webhook
 
